@@ -1,53 +1,38 @@
-require("dotenv").config();
-const express = require("express");
-const path = require("path");
-const hbs = require("hbs");
-const session = require("express-session");
-const bodyParser = require("body-parser");
-const routes = require("./routes/index");
+require('dotenv').config();
+const express  = require('express');
+const path     = require('path');
+const exphbs   = require('express-handlebars');   // ← вместо пакета «hbs»
+const session  = require('express-session');
+const bodyParser = require('body-parser');
+const routes   = require('./routes');
 
-const app = express();
+const app  = express();
 const PORT = process.env.PORT || 3000;
 
-// Настройка Handlebars
-app.set("view engine", "hbs");
-app.set("views", path.join(__dirname, "views"));
-hbs.handlebars.partials = {};
-const { engine } = require('express-handlebars');
-app.engine('hbs', engine({
-  extname: 'hbs',
-  layoutsDir: path.join(__dirname, 'views', 'layouts'),
-  partialsDir: path.join(__dirname, 'views', 'partials')   // <-- важно
-}));
-
-
-hbs.registerHelper("ifEquals", function (arg1, arg2, options) {
-  return arg1 == arg2 ? options.fn(this) : options.inverse(this);
+/* ---------- Handlebars ---------- */
+const hbs = exphbs.create({
+  extname:      'hbs',
+  layoutsDir:   path.join(__dirname, 'views', 'layouts'),
+  partialsDir:  path.join(__dirname, 'views', 'partials'),
+  defaultLayout:'main',
+  helpers: {
+    ifEquals(a, b, opts) { return a == b ? opts.fn(this) : opts.inverse(this); },
+    eq(a, b)            { return a === b; },
+    statusLabel(status) {
+      return ({new:'Новая', confirmed:'Подтверждена', cancelled:'Отменена', completed:'Завершена'})[status] || status;
+    },
+    statusColor(status) {
+      return ({new:'blue lighten-4', confirmed:'green lighten-4',
+               cancelled:'red lighten-4', completed:'grey lighten-2'})[status] || '';
+    }
+  }
 });
+app.engine('hbs', hbs.engine);
+app.set('view engine', 'hbs');
+app.set('views', path.join(__dirname, 'views'));
 
-hbs.registerHelper("eq", function (a, b) {
-  return a === b;
-});
+/* ---------- остальной код сервера без изменений ---------- */
 
-hbs.registerHelper("statusLabel", function (status) {
-  const map = {
-    new: "Новая",
-    confirmed: "Подтверждена",
-    cancelled: "Отменена",
-    completed: "Завершена",
-  };
-  return map[status] || status;
-});
-
-hbs.registerHelper("statusColor", function (status) {
-  const map = {
-    new: "blue lighten-4",
-    confirmed: "green lighten-4",
-    cancelled: "red lighten-4",
-    completed: "grey lighten-2",
-  };
-  return map[status] || "";
-});
 
 // Парсинг тела запроса
 app.use(bodyParser.urlencoded({ extended: true }));

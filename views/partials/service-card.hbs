@@ -1,20 +1,16 @@
-<div class="card hoverable">
-  <div class="card-content">
-    <span class="card-title">{{name}}</span>
-    <p><strong>Категория:</strong> {{category}}</p>
-    <p><strong>Описание:</strong> {{description}}</p>
-    <p><strong>Стоимость:</strong> {{price}} ₽</p>
-    <p><strong>Статус:</strong> {{#if is_active}}Активна{{else}}Неактивна{{/if}}</p>
-  </div>
-  <div class="card-action right-align">
-    <a href="/services/edit/{{id}}" class="btn-flat tooltipped" data-tooltip="Редактировать">
-      <i class="material-icons">edit</i>
-    </a>
-    <a href="/services/toggle/{{id}}" class="btn-flat tooltipped" data-tooltip="Активировать/Деактивировать">
-      <i class="material-icons">visibility</i>
-    </a>
-    <a href="/services/delete/{{id}}" class="btn-flat red-text tooltipped" data-tooltip="Удалить" onclick="return confirm('Удалить услугу?');">
+<div class="card-action right-align">
+  <a href="/services/edit/{{id}}" class="btn-flat tooltipped" data-tooltip="Редактировать">
+    <i class="material-icons">edit</i>
+  </a>
+
+  <a href="/services/toggle/{{id}}" class="btn-flat tooltipped" data-tooltip="Активировать/Деактивировать">
+    <i class="material-icons">visibility</i>
+  </a>
+
+  <form action="/services/delete/{{id}}" method="POST" style="display:inline">
+    <button type="submit" class="btn-flat red-text tooltipped" data-tooltip="Удалить"
+            onclick="return confirm('Удалить услугу?');">
       <i class="material-icons">delete</i>
-    </a>
-  </div>
+    </button>
+  </form>
 </div>
