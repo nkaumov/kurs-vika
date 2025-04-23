@@ -3,35 +3,56 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{title}}</title>
+  <title>{{title}} | Beauty CRM</title>
 
-  <!-- Materialize CSS -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-
-  <!-- Иконки Material -->
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
-  <!-- Стили -->
+  <!-- Materialize -->
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link rel="stylesheet"
+        href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <!-- Пользовательские стили -->
   <link rel="stylesheet" href="/css/style.css">
 </head>
+
 <body>
 
-  <div class="layout">
-    <!-- Сайдбар -->
-    {{!-- <aside class="sidebar grey lighten-4">
-      {{{sidebar}}}
-    </aside> --}}
+  <!-- ====== мобильный бургер ====== -->
+  <a href="#" data-target="mobile-sidenav"
+     class="sidenav-trigger hide-on-large-only"
+     style="position:fixed;top:14px;left:14px;z-index:1001;">
+    <i class="material-icons large grey-text text-darken-3">menu</i>
+  </a>
 
-    <!-- Контент -->
+  <div class="layout">
+    <!-- ====== фикс-сайдбар (десктоп) ====== -->
+    {{#if sidebar}}
+      <aside class="sidebar grey lighten-4 hide-on-med-and-down">
+        {{> (lookup . 'sidebar')}}
+      </aside>
+    {{/if}}
+
+    <!-- ====== контент ====== -->
     <main class="content">
       {{{body}}}
     </main>
   </div>
 
-  <!-- Materialize JS -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <!-- ====== mobile-sidenav (тот же контент, но для < 992 px) ====== -->
+  {{#if sidebar}}
+    <ul id="mobile-sidenav" class="sidenav">
+      {{> (lookup . 'sidebar')}}
+    </ul>
+  {{/if}}
 
-  <!-- JS -->
-  <script src="/js/main.js"></script>
+  <!-- Скрипты -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded',()=>{
+      M.Sidenav.init(document.querySelectorAll('.sidenav'),{edge:'left'});
+      M.Modal.init (document.querySelectorAll('.modal'));
+      M.FormSelect.init(document.querySelectorAll('select'));
+      M.Tooltip.init(document.querySelectorAll('.tooltipped'));
+    });
+  </script>
 </body>
 </html>

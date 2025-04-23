@@ -1,15 +1,6 @@
-<ul class="collection with-header sidebar-menu">
-  <li class="collection-header">
-    <h5 class="center-align">Меню</h5>
-  </li>
-  <li class="collection-item">
-    <a href="/schedule" class="black-text">
-      <i class="material-icons left">event</i> Окна
-    </a>
-  </li>
-  <li class="collection-item">
-    <a href="/my-requests" class="black-text">
-      <i class="material-icons left">assignment_ind</i> Заявки
-    </a>
-  </li>
-</ul>
+<li><a href="/schedule"      class="{{#if (eq ../title 'Окна')}}active{{/if}}">
+      <i class="material-icons">event_available</i> Окна</a></li>
+<li><a href="/my-requests"   class="{{#if (eq ../title 'Мои заявки')}}active{{/if}}">
+      <i class="material-icons">assignment</i> Заявки</a></li>
+<li><div class="divider"></div></li>
+<li><a href="/logout"><i class="material-icons">exit_to_app</i> Выйти</a></li>

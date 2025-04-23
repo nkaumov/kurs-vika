@@ -1,60 +1,55 @@
-/* main.hbs */
+/* ===== База ===== */
+html,body{height:100%;margin:0;font-family:"Roboto",sans-serif;background:#fafafa;color:#333}
+a{color:#333}
 
-body, html {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    font-family: 'Roboto', sans-serif;
-  }
-  
-  .layout {
-    display: flex;
-    height: 100vh;
-  }
-  
-  .sidebar {
-    width: 240px;
-    padding: 0;
-    border-right: 1px solid #e0e0e0;
-  }
-  
-  .content {
-    flex: 1;
-    padding: 20px;
-    overflow-y: auto;
-  }
-  
-  /* client-start.hbs */
+/* ===== Sidenav ===== */
+.sidenav-fixed{width:260px}
+.sidenav li a{display:flex;align-items:center;font-weight:500;padding:12px 20px}
+.sidenav li a i{margin-right:16px;font-size:20px}
+.sidenav li a.active,
+.sidenav li a:hover{background:#ececec}
+@media (max-width:992px){
+  .sidenav-fixed{transform:translateX(-105%)}
+}
 
-  .client-welcome {
-    margin-top: 10vh;
-    animation-duration: 1s;
-    animation-fill-mode: both;
-  }
-  
-  @keyframes fadeInDown {
-    from { opacity: 0; transform: translateY(-20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  
-  @keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  
-  .animated {
-    animation-duration: 1s;
-    animation-fill-mode: both;
-  }
-  
-  .fadeInDown { animation-name: fadeInDown; }
-  .fadeInUp { animation-name: fadeInUp; }
-  .pulse {
-    animation: pulse 2s infinite;
-  }
-  
-  @keyframes pulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-  }
-  
+/* ===== Контент ===== */
+.main-content{padding:32px 24px}
+@media (min-width:993px){
+  body.has-sidebar .main-content{margin-left:260px}
+}
+
+/* ===== Белая «карточка-лист» для любой страницы ===== */
+.page-card{
+  background:#fff;
+  border-radius:12px;
+  padding:32px;
+  box-shadow:0 2px 8px rgba(0,0,0,.08);
+}
+
+/* Таблицы чуть «пухлее» */
+table.highlight>tbody>tr:hover{background:#f9f9f9}
+table td,table th{padding:14px 16px}
+
+
+/* ===== Базовая раскладка ===== */
+.layout{display:flex;min-height:100vh}
+.sidebar{width:260px;flex:none}
+.content{flex:1;padding:32px}
+
+/* ===== карточный «лист» эмоций для всего, что рендерите ===== */
+.content .page-card{background:#fff;border-radius:12px;padding:32px;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+
+/* ===== sidenav-пункты ===== */
+.sidebar a,
+.sidenav  a{display:flex;align-items:center;padding:12px 20px;font-weight:500;color:#333}
+.sidebar a i,
+.sidenav  a i{margin-right:16px;font-size:20px}
+.sidebar a.active,
+.sidebar a:hover,
+.sidenav  a.active,
+.sidenav  a:hover{background:#e0e0e0}
+
+/* мобильные: убираем отступ слева, сайдбар фикс не нужен */
+@media(max-width:992px){
+  .content{padding:24px}
+}

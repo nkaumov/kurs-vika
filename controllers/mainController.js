@@ -130,13 +130,13 @@ exports.clientSubmitApplication = async (req, res) => {
 
 // ==================== Менеджер ====================
 exports.dashboard = (req, res) => {
-  res.render('dashboard', { layout: 'main', title: 'Дашборд', sidebar: 'partials/sidebar-manager' });
+  res.render('dashboard', { layout: 'main', title: 'Дашборд', sidebar: 'sidebar-manager' });
 };
 
 exports.services = async (req, res) => {
   try {
     const services = await db.Service.findAll({ order: [['created_at', 'DESC']] });
-    res.render('services', { layout: 'main', title: 'Услуги', sidebar: 'partials/sidebar-manager', services });
+    res.render('services', { layout: 'main', title: 'Услуги', sidebar: 'sidebar-manager', services });
   } catch (e) {
     console.error(e);
     res.redirect('/dashboard');
@@ -145,7 +145,7 @@ exports.services = async (req, res) => {
 
 // exports.services = async (req, res) => {
 //   const services = []; // получить из БД
-//   res.render('services', { layout: 'main', title: 'Услуги', sidebar: 'partials/sidebar-manager', services });
+//   res.render('services', { layout: 'main', title: 'Услуги', sidebar: 'sidebar-manager', services });
 // };
 
 exports.addService = async (req, res) => {
@@ -164,7 +164,7 @@ exports.addService = async (req, res) => {
 exports.editServiceForm = async (req, res) => {
   const service = await db.Service.findByPk(req.params.id);
   if (!service) return res.redirect('/services');
-  res.render('edit-service', { layout: 'main', title: 'Редактирование услуги', sidebar: 'partials/sidebar-manager', service });
+  res.render('edit-service', { layout: 'main', title: 'Редактирование услуги', sidebar: 'sidebar-manager', service });
 };
 
 
@@ -208,7 +208,7 @@ exports.deleteService = async (req, res) => {
 exports.masters = async (req, res) => {
   try {
     const masters = await db.Master.findAll({ order: [['created_at', 'DESC']] });
-    res.render('masters', { layout: 'main', title: 'Мастера', sidebar: 'partials/sidebar-manager', masters });
+    res.render('masters', { layout: 'main', title: 'Мастера', sidebar: 'sidebar-manager', masters });
   } catch (err) {
     console.error('Ошибка при получении мастеров:', err);
     res.redirect('/dashboard');
@@ -238,7 +238,7 @@ exports.addMaster = async (req, res) => {
 exports.editMasterForm = async (req, res) => {
   const master = await db.Master.findByPk(req.params.id);
   if (!master) return res.redirect('/masters');
-  res.render('edit-master', { layout: 'main', title: 'Редактирование мастера', sidebar: 'partials/sidebar-manager', master });
+  res.render('edit-master', { layout: 'main', title: 'Редактирование мастера', sidebar: 'sidebar-manager', master });
 };
 
 exports.updateMaster = async (req, res) => {
@@ -285,7 +285,7 @@ exports.managerRequests = async (req, res) => {
       status: r.status
     }));
 
-    res.render('requests', { layout: 'main', title: 'Заявки', sidebar: 'partials/sidebar-manager', requests: prepared });
+    res.render('requests', { layout: 'main', title: 'Заявки', sidebar: 'sidebar-manager', requests: prepared });
   } catch (e) {
     console.error(e);
     res.redirect('/dashboard');
@@ -311,7 +311,7 @@ exports.masterSchedule = async (req, res) => {
       where: { master_id: req.session.user.id },
       order: [['date', 'ASC'], ['time', 'ASC']]
     });
-    res.render('schedule', { layout: 'main', title: 'Окна', sidebar: 'partials/sidebar-master', slots });
+    res.render('schedule', { layout: 'main', title: 'Окна', sidebar: 'sidebar-master', slots });
   } catch (e) {
     console.error(e);
     res.redirect('/schedule');
@@ -351,7 +351,7 @@ exports.editSlotForm = async (req, res) => {
     where: { id: req.params.id, master_id: req.session.user.id }
   });
   if (!slot) return res.redirect('/schedule');
-  res.render('edit-slot', { layout: 'main', title: 'Редактирование окна', sidebar: 'partials/sidebar-master', slot });
+  res.render('edit-slot', { layout: 'main', title: 'Редактирование окна', sidebar: 'sidebar-master', slot });
 };
 
 exports.updateSlot = async (req, res) => {
@@ -395,7 +395,7 @@ exports.masterRequests = async (req, res) => {
     res.render('master-requests', {
       layout: 'main',
       title: 'Мои заявки',
-      sidebar: 'partials/sidebar-master',
+      sidebar: 'sidebar-master',
       requests: prepared
     });
   } catch (e) {

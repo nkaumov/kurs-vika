@@ -1,16 +1,33 @@
-<div class="card-action right-align">
-  <a href="/services/edit/{{id}}" class="btn-flat tooltipped" data-tooltip="Редактировать">
-    <i class="material-icons">edit</i>
-  </a>
+<div class="card hoverable">
+  <div class="card-content">
+    <span class="card-title">{{name}}</span>
+    <p class="grey-text text-darken-1">{{category}}</p>
 
-  <a href="/services/toggle/{{id}}" class="btn-flat tooltipped" data-tooltip="Активировать/Деактивировать">
-    <i class="material-icons">visibility</i>
-  </a>
+    <p style="margin-top:10px;font-weight:700;">
+      {{price}}&nbsp;₽
+    </p>
 
-  <form action="/services/delete/{{id}}" method="POST" style="display:inline">
-    <button type="submit" class="btn-flat red-text tooltipped" data-tooltip="Удалить"
-            onclick="return confirm('Удалить услугу?');">
-      <i class="material-icons">delete</i>
-    </button>
-  </form>
+    {{#unless is_active}}
+      <span class="new badge red" data-badge-caption="Неактивна"></span>
+    {{/unless}}
+  </div>
+
+  <div class="card-action right-align">
+    <a href="/services/edit/{{id}}" class="btn-flat tooltipped" data-tooltip="Редактировать">
+      <i class="material-icons">edit</i>
+    </a>
+
+    <a href="/services/toggle/{{id}}" class="btn-flat tooltipped" data-tooltip="Активировать/Деактивировать">
+      <i class="material-icons">visibility</i>
+    </a>
+
+    <form action="/services/delete/{{id}}" method="POST" style="display:inline">
+      <button type="submit"
+              class="btn-flat red-text tooltipped"
+              data-tooltip="Удалить"
+              onclick="return confirm('Удалить услугу?');">
+        <i class="material-icons">delete</i>
+      </button>
+    </form>
+  </div>
 </div>

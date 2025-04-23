@@ -1,12 +1,20 @@
-<td>
-  <a href="/masters/edit/{{id}}" class="btn-flat tooltipped" data-tooltip="Редактировать">
-    <i class="material-icons">edit</i>
-  </a>
+<tr>
+  <td>{{full_name}}</td>
+  <td>{{phone}}</td>
+  <td>{{service_category}}</td>
+  <td>{{login}}</td>
+  <td>
+    <a href="/masters/edit/{{id}}" class="btn-flat tooltipped" data-tooltip="Редактировать">
+      <i class="material-icons">edit</i>
+    </a>
 
-  <form action="/masters/delete/{{id}}" method="POST" style="display:inline">
-    <button type="submit" class="btn-flat red-text tooltipped" data-tooltip="Удалить"
-            onclick="return confirm('Удалить мастера?');">
-      <i class="material-icons">delete</i>
-    </button>
-  </form>
-</td>
+    <form action="/masters/delete/{{id}}" method="POST" style="display:inline">
+      <button type="submit"
+              class="btn-flat red-text tooltipped"
+              data-tooltip="Удалить"
+              onclick="return confirm('Удалить мастера?');">
+        <i class="material-icons">delete</i>
+      </button>
+    </form>
+  </td>
+</tr>
