@@ -1,0 +1,20 @@
+<h4 class="center-align">Выберите мастера</h4>
+
+<div class="row">
+  {{#each masters}}
+    <div class="col s12 m6">
+      <div class="card hoverable">
+        <div class="card-content">
+          <span class="card-title">{{full_name}}</span>
+          <p><strong>Телефон:</strong> {{phone}}</p>
+          <p><strong>Категория:</strong> {{service_category}}</p>
+        </div>
+        <div class="card-action center-align">
+          <a href="/client/select-slot/{{../serviceId}}/{{id}}" class="btn pink lighten-1">Выбрать</a>
+        </div>
+      </div>
+    </div>
+  {{else}}
+    <p class="center-align">Нет мастеров, доступных по выбранной услуге.</p>
+  {{/each}}
+</div>

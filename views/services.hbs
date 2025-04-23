@@ -1,0 +1,53 @@
+<h4 class="center-align">Услуги</h4>
+
+<div class="right-align" style="margin-bottom: 20px;">
+  <a class="btn-floating btn-large waves-effect waves-light red modal-trigger" href="#addServiceModal">
+    <i class="material-icons">add</i>
+  </a>
+</div>
+
+<div class="row">
+  {{#each services}}
+    <div class="col s12 m6 l4">
+      {{> service-card}}
+    </div>
+  {{else}}
+    <p class="center-align">Пока услуг нет.</p>
+  {{/each}}
+</div>
+
+<!-- Модальное окно добавления услуги -->
+<div id="addServiceModal" class="modal">
+  <div class="modal-content">
+    <h5>Добавить новую услугу</h5>
+    <form action="/services/add" method="POST">
+      <div class="input-field">
+        <input id="name" name="name" type="text" required>
+        <label for="name">Название услуги</label>
+      </div>
+      <div class="input-field">
+        <input id="category" name="category" type="text" required>
+        <label for="category">Категория</label>
+      </div>
+      <div class="input-field">
+        <textarea id="description" name="description" class="materialize-textarea"></textarea>
+        <label for="description">Описание</label>
+      </div>
+      <div class="input-field">
+        <input id="price" name="price" type="number" step="0.01" required>
+        <label for="price">Стоимость</label>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="modal-close btn green">Добавить</button>
+        <a href="#!" class="modal-close btn-flat">Отмена</a>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const elems = document.querySelectorAll('.modal');
+    M.Modal.init(elems);
+  });
+</script>

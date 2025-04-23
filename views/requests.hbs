@@ -1,0 +1,43 @@
+<h4 class="center-align">Заявки клиентов</h4>
+
+<table class="highlight responsive-table">
+  <thead>
+    <tr>
+      <th>Клиент</th>
+      <th>Телефон</th>
+      <th>Услуга</th>
+      <th>Мастер</th>
+      <th>Дата и время</th>
+      <th>Статус</th>
+      <th>Действия</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each requests}}
+      <tr>
+        <td>{{client_name}}</td>
+        <td>{{client_phone}}</td>
+        <td>{{service_name}}</td>
+        <td>{{master_name}}</td>
+        <td>{{date}} {{time}}</td>
+        <td>{{status}}</td>
+        <td>
+          <form action="/requests/update/{{id}}" method="POST" style="display: inline;">
+            <div class="input-field" style="margin: 0;">
+              <select name="status" class="browser-default" onchange="this.form.submit()">
+                <option value="new" {{#ifEquals status 'new'}}selected{{/ifEquals}}>Новая</option>
+                <option value="confirmed" {{#ifEquals status 'confirmed'}}selected{{/ifEquals}}>Подтверждена</option>
+                <option value="cancelled" {{#ifEquals status 'cancelled'}}selected{{/ifEquals}}>Отменена</option>
+                <option value="completed" {{#ifEquals status 'completed'}}selected{{/ifEquals}}>Завершена</option>
+              </select>
+            </div>
+          </form>
+        </td>
+      </tr>
+    {{else}}
+      <tr>
+        <td colspan="7" class="center-align">Заявок пока нет.</td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>

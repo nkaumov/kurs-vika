@@ -1,0 +1,19 @@
+<h4 class="center-align">Выберите удобное время</h4>
+
+<div class="row">
+  {{#each slots}}
+    <div class="col s12 m6 l4">
+      <div class="card hoverable">
+        <div class="card-content center-align">
+          <h5>{{date}}</h5>
+          <p><strong>Время:</strong> {{time}}</p>
+        </div>
+        <div class="card-action center-align">
+          <a href="/client/apply?service_id={{../serviceId}}&master_id={{../masterId}}&slot_id={{id}}" class="btn pink lighten-1">Выбрать</a>
+        </div>
+      </div>
+    </div>
+  {{else}}
+    <p class="center-align">Свободных окон пока нет.</p>
+  {{/each}}
+</div>

@@ -1,16 +1,19 @@
 {
   "name": "kursovaya_vika",
   "version": "1.0.0",
-  "description": "��#\u0000 \u0000k\u0000u\u0000r\u0000s\u0000-\u0000v\u0000i\u0000k\u0000a\u0000\r\u0000 \u0000",
+  "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app.js",
+    "dev": "nodemon app.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^5.1.1",
     "body-parser": "^2.2.0",
     "express": "^5.1.0",
+    "express-handlebars": "^8.0.2",
     "express-session": "^1.18.1",
     "hbs": "^4.2.0",
     "mysql2": "^3.14.0",

@@ -1,0 +1,75 @@
+<h4 class="center-align">Мои окна приёма</h4>
+
+<div class="right-align" style="margin-bottom: 20px;">
+  <a class="btn-floating btn-large waves-effect waves-light red modal-trigger" href="#addSlotModal">
+    <i class="material-icons">add</i>
+  </a>
+</div>
+
+<table class="highlight responsive-table">
+  <thead>
+    <tr>
+      <th>Дата</th>
+      <th>Время</th>
+      <th>Категория</th>
+      <th>Статус</th>
+      <th>Действия</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each slots}}
+      <tr>
+        <td>{{date}}</td>
+        <td>{{time}}</td>
+        <td>{{service_category}}</td>
+        <td>
+          {{#if (eq status "available")}}Доступно{{else}}Занято{{/if}}
+        </td>
+        <td>
+          <a href="/schedule/edit/{{id}}" class="btn-flat tooltipped" data-tooltip="Редактировать">
+            <i class="material-icons">edit</i>
+          </a>
+          <a href="/schedule/delete/{{id}}" class="btn-flat red-text tooltipped" data-tooltip="Удалить" onclick="return confirm('Удалить окошко?');">
+            <i class="material-icons">delete</i>
+          </a>
+        </td>
+      </tr>
+    {{else}}
+      <tr>
+        <td colspan="5" class="center-align">Окошек пока нет.</td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>
+
+<!-- Модальное окно для добавления окошка -->
+<div id="addSlotModal" class="modal">
+  <div class="modal-content">
+    <h5>Добавить окно приёма</h5>
+    <form action="/schedule/add" method="POST">
+      <div class="input-field">
+        <input id="date" name="date" type="date" required>
+        <label for="date">Дата</label>
+      </div>
+      <div class="input-field">
+        <input id="time" name="time" type="time" required>
+        <label for="time">Время</label>
+      </div>
+      <div class="input-field">
+        <input id="category" name="service_category" type="text" required>
+        <label for="category">Категория услуги</label>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="modal-close btn green">Добавить</button>
+        <a href="#!" class="modal-close btn-flat">Отмена</a>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const modals = document.querySelectorAll('.modal');
+    M.Modal.init(modals);
+  });
+</script>

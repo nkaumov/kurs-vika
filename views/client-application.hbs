@@ -1,0 +1,42 @@
+<h4 class="center-align">Заполните данные для записи</h4>
+
+<form action="/client/submit-application" method="POST" class="col s12 m8 offset-m2">
+  <input type="hidden" name="service_id" value="{{service.id}}">
+  <input type="hidden" name="master_id" value="{{master.id}}">
+  <input type="hidden" name="slot_id" value="{{slot.id}}">
+
+  <div class="card">
+    <div class="card-content">
+      <span class="card-title">Детали записи</span>
+
+      <div class="input-field">
+        <input id="client_name" name="client_name" type="text" required>
+        <label for="client_name">Ваше имя</label>
+      </div>
+
+      <div class="input-field">
+        <input id="client_phone" name="client_phone" type="tel" required>
+        <label for="client_phone">Номер телефона</label>
+      </div>
+
+      <div class="input-field">
+        <input type="text" value="{{service.name}}" disabled>
+        <label class="active">Услуга</label>
+      </div>
+
+      <div class="input-field">
+        <input type="text" value="{{master.full_name}}" disabled>
+        <label class="active">Мастер</label>
+      </div>
+
+      <div class="input-field">
+        <input type="text" value="{{slot.date}} {{slot.time}}" disabled>
+        <label class="active">Дата и время</label>
+      </div>
+    </div>
+
+    <div class="card-action right-align">
+      <button type="submit" class="btn green">Подтвердить запись</button>
+    </div>
+  </div>
+</form>

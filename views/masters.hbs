@@ -1,0 +1,69 @@
+<h4 class="center-align">Мастера</h4>
+
+<div class="right-align" style="margin-bottom: 20px;">
+  <a class="btn-floating btn-large waves-effect waves-light red modal-trigger" href="#addMasterModal">
+    <i class="material-icons">add</i>
+  </a>
+</div>
+
+<table class="highlight responsive-table">
+  <thead>
+    <tr>
+      <th>ФИО</th>
+      <th>Телефон</th>
+      <th>Категория</th>
+      <th>Логин</th>
+      <th>Действия</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each masters}}
+      {{> master-row }}
+
+    {{else}}
+      <tr>
+        <td colspan="5" class="center-align">Мастеров пока нет.</td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>
+
+<!-- Модалка для добавления мастера -->
+<div id="addMasterModal" class="modal">
+  <div class="modal-content">
+    <h5>Добавить мастера</h5>
+    <form action="/masters/add" method="POST">
+      <div class="input-field">
+        <input id="full_name" name="full_name" type="text" required>
+        <label for="full_name">ФИО</label>
+      </div>
+      <div class="input-field">
+        <input id="phone" name="phone" type="text" required>
+        <label for="phone">Номер телефона</label>
+      </div>
+      <div class="input-field">
+        <input id="category" name="category" type="text" required>
+        <label for="category">Категория услуги</label>
+      </div>
+      <div class="input-field">
+        <input id="login" name="login" type="text" required>
+        <label for="login">Логин</label>
+      </div>
+      <div class="input-field">
+        <input id="password" name="password" type="password" required>
+        <label for="password">Пароль</label>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="modal-close btn green">Добавить</button>
+        <a href="#!" class="modal-close btn-flat">Отмена</a>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const modals = document.querySelectorAll('.modal');
+    M.Modal.init(modals);
+  });
+</script>
